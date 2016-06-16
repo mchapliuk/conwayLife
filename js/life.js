@@ -2,7 +2,7 @@ class Life {
   constructor(options) {
     this.width = options.width;
     this.height = options.height;
-    
+
     this._init();
   }
 
@@ -18,7 +18,7 @@ class Life {
   }
 
   _initTemporayUniverse() {
-    let un = this.universeStep = [];
+    let un = this.nextGeneration = [];
     for (let i = 0; i < this.width; i++) {
       un[i] = [];
       for (let j = 0; j < this.height; j++) {
@@ -72,11 +72,11 @@ class Life {
             cell = !cell;
           }
         }
-        this.universeStep[i][j] = cell;
+        this.nextGeneration[i][j] = cell;
       }
     }
 
     // copy tmp universe into main universe
-    this.universe = this.universeStep.slice();
+    this.universe = this.nextGeneration.slice();
   }
 }
