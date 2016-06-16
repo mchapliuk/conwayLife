@@ -7,8 +7,8 @@ const livereload = require('gulp-livereload'); // Requires special Chrome extens
 const http = require('http');
 const st = require('st'); //A module for serving static files. Does etags, caching, etc.
 
-const JS_LIST = ['js/**/*.js'];
-const LESS_LIST = ['less/**/*.less'];
+const JS_LIST = ['./js/**/*.js'];
+const LESS_LIST = ['./less/**/*.less'];
 
 gulp.task('less', () => {
   return gulp.src(LESS_LIST)
@@ -23,12 +23,12 @@ gulp.task('babel', () => {
       presets: ['es2015']
     }))
     .pipe(gulp.dest('./dist'))
-    .pipe(livereload.reload('dist/index.html'));
+    .pipe(livereload());
 });
 
-gulp.task('server', done => {
-  gulp.src('index.html')
-    .pipe(gulp.dest('dist'));
+gulp.task('server', ['less', 'babel'], done => {
+  gulp.src('index.html').pipe(gulp.dest('dist'));
+
   http.createServer(
     st({
       path: `${__dirname}/dist`,
@@ -40,8 +40,7 @@ gulp.task('server', done => {
 
 gulp.task('watch', ['server'], () => {
   livereload.listen({
-    basePath: 'dist',
-    host: 'localhost'
+    basePath: 'dist'
   });
   livereload.reload('dist/index.html');
   gulp.watch(LESS_LIST, ['less']);

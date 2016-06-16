@@ -1,0 +1,20 @@
+@import "constants.less";
+
+svg {
+  fill: @canvasBackground;
+}
+
+rect.cell {
+  &.alive {
+    fill: @cellAliveColor;
+    &:hover {
+      fill: darken(@cellAliveColor, 20%);
+    }
+  }
+  &.dead {
+    fill: @cellDeadColor;
+    &:hover {
+      fill: darken(@cellDeadColor, 20%);
+    }
+  }
+}
