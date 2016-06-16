@@ -24,13 +24,21 @@ document.addEventListener('DOMContentLoaded', () => {
     cellSize: CELL_SIZE
   }, document.getElementById('field'), lifeCore);
 
+  let process;
+
   document.getElementById('reset').addEventListener('click', () => {
     lifeCore.reset();
     universe.reset();
   });
 
   document.getElementById('run').addEventListener('click', () => {
-    lifeCore.next();
-    universe.render(lifeCore);
+    process = setInterval(() => {
+      lifeCore.next();
+      universe.render(lifeCore);
+    }, 600);
+  });
+
+  document.getElementById('stop').addEventListener('click', () => {
+    clearInterval(process);
   });
 });

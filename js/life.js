@@ -2,7 +2,7 @@ class Life {
   constructor(options) {
     this.width = options.width;
     this.height = options.height;
-
+    
     this._init();
   }
 
@@ -44,47 +44,35 @@ class Life {
     var self = this;
     this._initTemporayUniverse();
 
-    function getNeighbors(i, j, w, h) {
+    function countAliveNeighbors(i, j, w, h) {
       const u = self.universe;
-      let res = []
+      let count = 0;
       for (let k = i - 1; k <= i + 1; k++) {
         for (let l = j - 1; l <= j + 1; l++) {
           if (k >= 0 && k < w && l >= 0 && l < h && !(k === i && l === j)) {
-            res.push(u[k][l]);
+            if (u[k][l]) count++;
           }
         }
       }
-      return res;
-    }
-
-    function countAliveNeighbors(neighborsList) {
-      let count = 0;
-      neighborsList.forEach(cell => {
-        if (cell) count++;
-      });
       return count;
     }
 
     for (let i = 0; i < this.width; i++) {
       for (let j = 0; j < this.height; j++) {
         let cell = this.universe[i][j];
-        let neighbors = getNeighbors(i, j, this.width, this.height);
-        const count = countAliveNeighbors(neighbors);
+        const count = countAliveNeighbors(i, j, this.width, this.height);
         if (cell) {
           // if cell alive
           if (count < 2 || count > 3) {
-            this.universeStep[i][j] = !cell;
-          } else {
-            this.universeStep[i][j] = cell;
+            cell = !cell;
           }
         } else {
           // if cell dead
           if (count === 3) {
-            this.universeStep[i][j] = !cell;
-          } else {
-            this.universeStep[i][j] = cell;
+            cell = !cell;
           }
         }
+        this.universeStep[i][j] = cell;
       }
     }
 
