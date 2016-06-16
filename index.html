@@ -12,15 +12,30 @@
   </head>
   <body>
     <?xml-stylesheet type="text/css" href="/css/svg.css" ?>
-    <header>
-      <div class="settings">
-        <button type="button" name="run" id="run">Run</button>
-        <button type="button" name="reset" id="reset">Reset</button>
-        <button type="button" name="stop" id="stop">Stop</button>
+    <header id="header">
+      <div class="settings xs-hidden">
+        <fieldset class="xs-hidden">
+          <input type="radio" name="fieldSize" value="fullSize" checked>Full Size Universe
+          <input type="radio" name="fieldSize" value="x30" visisble="false">30 x 30 size Universe
+        </fieldset>
+      </div>
+      <div class="controls">
+        <fieldset>
+          <button type="button" name="run" id="run">Run</button>
+          <button type="button" name="stop" id="stop">Pause</button>
+          <button type="button" name="reset" id="reset">Reset</button>
+        </fieldset>
+      </div>
+      <div class="info">
+        <label id="infoLabel"></label>
       </div>
     </header>
-    <main id="field"></main>
-    <footer>
+    <main>
+      <div class="game" id="field">
+
+      </div>
+    </main>
+    <footer id="footer">
       <div class="version">
         @version
       </div>
