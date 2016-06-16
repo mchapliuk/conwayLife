@@ -6,7 +6,9 @@ const less = require('gulp-less');
 const livereload = require('gulp-livereload'); // Requires special Chrome extension
 const http = require('http');
 const st = require('st'); //A module for serving static files. Does etags, caching, etc.
+const replace = require('gulp-replace');
 
+const VERSION = require('./package.json').version;
 const JS_LIST = ['./js/**/*.js'];
 const LESS_LIST = ['./less/**/*.less'];
 
@@ -26,8 +28,14 @@ gulp.task('babel', () => {
     .pipe(livereload());
 });
 
-gulp.task('server', ['less', 'babel'], done => {
-  gulp.src('index.html').pipe(gulp.dest('dist'));
+gulp.task('version', () => {
+  gulp.src('index.html')
+    .pipe(replace('@version', `v.${VERSION}`))
+    .pipe(gulp.dest('dist'));
+});
+
+gulp.task('server', ['less', 'babel', 'version'], done => {
+  // gulp.src('index.html').pipe(gulp.dest('dist'));
 
   http.createServer(
     st({
