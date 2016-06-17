@@ -1,18 +1,57 @@
 @import "constants.less";
 
-header, footer {
-  height: 50px;
+html, body, div, span, fieldset {
+  margin: 0;
+	padding: 0;
+  border: none;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+  font-family: monospace;
+}
+
+header {
+  padding: 10px;
+  fieldset {
+    margin: auto;
+    width: 50%;
+  }
+  @media only screen and (min-device-width: 320px) and (max-device-width: 480px) and (-webkit-min-device-pixel-ratio: 2) {
+    height: 44px;
+    fieldset {
+      width: 100%;
+    }
+  }
+}
+
+footer,
+header {
   background-color: @color;
   text-align: center;
 }
 
 .version {
-  margin: 10px;
+  color: @footerTextColor;
+  font-size: x-small;
+  padding: 5px;
+}
+
+.settings {
+  display: none;
+}
+
+.game {
+  text-align: center;
 }
 
 main {
-  width: 300px;
-  height: 300px;
   margin: auto;
   background-color: lighten(@color, 10%);
+  padding: 15px;
+}
+
+@media only screen and (min-device-width: 320px) and (max-device-width: 480px) and (-webkit-min-device-pixel-ratio: 2) {
+  .xs-hidden {
+    display: none !important;
+  }
 }

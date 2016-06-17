@@ -46,7 +46,7 @@ gulp.task('server', ['less', 'babel', 'version'], done => {
   ).listen(8080, done);
 });
 
-gulp.task('watch', ['server'], () => {
+gulp.task('serve', ['server'], () => {
   livereload.listen({
     basePath: 'dist'
   });

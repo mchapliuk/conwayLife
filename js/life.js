@@ -1,7 +1,7 @@
 class Life {
   constructor(options) {
-    this.width = options.width;
-    this.height = options.height;
+    this.width = options.width; // cells
+    this.height = options.height; // cells
 
     this._init();
   }

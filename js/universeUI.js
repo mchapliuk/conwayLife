@@ -2,11 +2,15 @@ const NS = "http://www.w3.org/2000/svg";
 
 class UniverseUI {
   constructor(options, parentEl, life) {
-    this.width = options.width;
-    this.height = options.height;
-    this.uWidth = options.universeWidth;
-    this.uHeight = options.universeHeight;
-    this.cellSize = options.cellSize;
+    // pixels
+    this.width = options.width || 100;
+    this.height = options.height || 100;
+    this.cellSize = options.cellSize || 10;
+    // cells
+    this.uWidth = options.universeWidth || 10;
+    this.uHeight = options.universeHeight || 10;
+
+    // instance of Life
     this.life = life;
 
     this.parentEl = parentEl;
@@ -16,10 +20,11 @@ class UniverseUI {
 
   _init() {
     // Create SVG context
-    this.canvas = document.createElementNS(NS, 'svg');
-    this.canvas.setAttribute('width', this.width);
-    this.canvas.setAttribute('height', this.height);
-    this.canvas.setAttribute('stroke', 'blue');
+    let c = this.canvas = document.createElementNS(NS, 'svg');
+    c.setAttribute('width', this.width);
+    c.setAttribute('height', this.height);
+    c.setAttribute('stroke', 'blue');
+    c.setAttribute('stroke-width', '0.4');
 
     // fill in with cells
     for (let i = 0; i < this.uWidth; i++) {
@@ -39,7 +44,7 @@ class UniverseUI {
           this._toggleCell(e.target);
         });
 
-        this.canvas.appendChild(cell);
+        c.appendChild(cell);
       }
     }
 
