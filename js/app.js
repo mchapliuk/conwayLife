@@ -20,12 +20,14 @@ document.addEventListener('DOMContentLoaded', () => {
   const btnRun = document.getElementById('run');
   const btnStop = document.getElementById('stop');
   const btnReset = document.getElementById('reset');
+  const lblGenerationNum = document.querySelector('[data-life="generationNum"]');
 
   (init = function(isFullSize = true) {
     btnRun.disabled = false;
     btnStop.disabled = true;
     btnReset.disabled = false;
-    
+    lblGenerationNum.innerText = 0;
+
     const winWidth = window.outerWidth - INNER_PADDING * 2;
     const winHeight = window.innerHeight - INNER_PADDING * 2;
 
@@ -69,6 +71,7 @@ document.addEventListener('DOMContentLoaded', () => {
     process = setInterval(() => {
       lifeCore.next();
       universe.render(lifeCore);
+      lblGenerationNum.innerText = lifeCore.generationNum;
     }, 600);
 
     btnStop.disabled = false;

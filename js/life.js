@@ -15,6 +15,7 @@ class Life {
       }
     }
     this.isAllDead = true;
+    this._generationNum = 0;
   }
 
   _initTemporayUniverse() {
@@ -25,6 +26,10 @@ class Life {
         un[i][j] = false;
       }
     }
+  }
+
+  get generationNum() {
+    return this._generationNum;
   }
 
   toggleCell(x, y) {
@@ -78,5 +83,6 @@ class Life {
 
     // copy tmp universe into main universe
     this.universe = this.nextGeneration.slice();
+    this._generationNum++;
   }
 }
